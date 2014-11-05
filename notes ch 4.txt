@@ -1,0 +1,23 @@
+CH4.
+Number types
+int and double
+constants - final 
+arithmetic operators ++,- -
+integer division
+math.Pow
+math.sqrt(?)
+double -> int
+cast(?)
+printf
+
+problem solving
+string type + concatenation
+escape seq \n,\t,\"
+chars(not really)
+substring
+string ops - concat (+), substring, length
+
+if
+else
+
+boolean
