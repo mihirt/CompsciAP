@@ -28,6 +28,10 @@ public class Turtles_Trivedi extends GraphicsProgram
       pause(100);
       //String winner = "";
       
+      boolean[] turtsFinished = new boolean[amtTurt];
+      for (int i = 0; i<amtTurt; i++)
+         turtsFinished[i] = false;
+      
       boolean exit = false;
       boolean winner = false;
       int winnerNum = 0;
@@ -36,26 +40,41 @@ public class Turtles_Trivedi extends GraphicsProgram
       {
          for (int i = 0; i<amtTurt; i++)
          {
-            if (turt[i].getX() < 610)
+            if (turt[i].getX() < 615)
                turt[i].forward(Math.random()*100);
             else
             {
+               turtsFinished[i] = true;
                if (!winner)
                {
                   winner = true;
                   winnerNum = i;
                }
-
+               
                System.out.println(winnerNum);
             }
-               
+            
+           if (areAllTrue(turtsFinished))
+            exit = true;
+           else
+            exit = false;           
          }
          pause(500);
       }
-      
-      
+         turt[winnerNum].penDown();
+         turt[winnerNum].right(180);
+         turt[winnerNum].forward(200);
+         turt[winnerNum].left(90);
+         turt[winnerNum].forward(200);      
       
    }
+   
+   public static boolean areAllTrue(boolean[] array)
+   {
+    for(boolean b : array) if(!b) return false;
+    return true;
+   }
+   
    
    public static void main(String[] args)
    {
