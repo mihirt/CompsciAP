@@ -5,6 +5,7 @@
 import acm.graphics.GTurtle;
 import acm.program.GraphicsProgram;
 import acm.graphics.GLine;
+import javax.swing.JOptionPane;
 
 /**
    This class creates and moves the turtles;
@@ -14,66 +15,45 @@ public class Turtles_Trivedi extends GraphicsProgram
 {
    public void run()
    {
+      String s = JOptionPane.showInputDialog("How many objects would you like to race?");
+      int amtTurt = Integer.parseInt(s);
+      GTurtle[] turt = new GTurtle[amtTurt];
+      for (int i = 0; i < amtTurt; i++)
+      {
+       turt[i] = new GTurtle(30, 100+100*i);
+       add(turt[i]);
+      }
       GLine finish = new GLine(600,600,600,0);
-      GTurtle turt1 = new GTurtle(30,100);
-      GTurtle turt2 = new GTurtle(30,250);
-      GTurtle turt3 = new GTurtle(30,400);
-      add(turt1);
-      add(turt2);
-      add(turt3);
       add(finish);
       pause(100);
-      String winner = "";
+      //String winner = "";
       
-      while(turt1.getX() < 600 || turt2.getX() < 600 || turt3.getX() < 600)
+      boolean exit = false;
+      boolean winner = false;
+      int winnerNum = 0;
+      
+      while (!exit)
       {
-         if (turt1.getX() < 600)   
-            turt1.forward(Math.random()*100);
-         if (turt1.getX() > 600 && !(winner.equals("turt2")|| winner.equals("turt3")))
+         for (int i = 0; i<amtTurt; i++)
          {
-            winner = "turt1";
-         }
-         
-         if (turt2.getX() < 600)
-            turt2.forward(Math.random()*100);
-         if (turt2.getX() > 600 && !(winner.equals("turt1")|| winner.equals("turt3")))
-         {
-            winner = "turt2";
-         }
-         
-         if (turt3.getX() < 600)
-            turt3.forward(Math.random()*100);
-         if (turt2.getX() > 600 && !(winner.equals("turt1") || winner.equals("turt2")))
-         {
-            winner = "turt3";
-         }
-         pause(Math.random()*1000);
-         //pause(1);
-      }
-      if (winner.equals("turt1"))
-      {
-         turt1.right(180);
-         turt1.forward(200);
-         turt1.left(90);
-         turt1.forward(200);
-      }
-      if (winner.equals("turt2"))
-      {
-         turt2.right(180);
-         turt2.forward(200);
-         turt2.left(90);
-         turt2.forward(200);
-      }
-      if (winner.equals("turt3"))
-      {
-         turt3.right(180);
-         turt3.forward(200);
-         turt3.left(90);
-         turt3.forward(200);
-      }
+            if (turt[i].getX() < 610)
+               turt[i].forward(Math.random()*100);
+            else
+            {
+               if (!winner)
+               {
+                  winner = true;
+                  winnerNum = i;
+               }
 
-   
-      System.out.println(winner);
+               System.out.println(winnerNum);
+            }
+               
+         }
+         pause(500);
+      }
+      
+      
       
    }
    
